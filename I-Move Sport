@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I-Move Sport - Toko Olahraga Premium</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: relative;
+            overflow: hidden;
+        }
+        #logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        #tagline {
+            font-style: italic;
+            margin-top: 0.5em;
+            font-size: 1.2em;
+        }
+        nav {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1em;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 1em;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        main {
+            max-width: 1200px;
+            margin: 2em auto;
+            padding: 1em;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2em;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 1em;
+        }
+        .product-title {
+            font-size: 1.2em;
+            margin: 0 0 0.5em 0;
+        }
+        .product-price {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8em;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            margin-top: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .buy-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        #specialOffer {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 1em;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        #specialOffer::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
+            );
+            animation: stripe-animation 20s linear infinite;
+        }
+        @keyframes stripe-animation {
+            0% {
+                transform: translateX(-50%) translateY(-50%) rotate(0deg);
+            }
+            100% {
+                transform: translateX(-50%) translateY(-50%) rotate(360deg);
+            }
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        #cart-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #cart-icon:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo">I-Move Sport</div>
+        <div id="tagline">Capai Batas Tertinggimu!</div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#products">Produk</a></li>
+            <li><a href="#about">Tentang Kami</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+    </nav>
+    <div id="specialOffer">
+        Flash Sale! Diskon 30% untuk 50 pembeli pertama - Gunakan kode: FLASH30
+    </div>
+    <main id="products">
+        <!-- Product cards will be dynamically added here -->
+    </main>
+    <div id="cart-icon">🛒</div>
+    <footer>
+        &copy; 2024 I-Move Sport - Semua Hak Cipta Dilindungi
+    </footer>
+    <script>
+        // Animasi logo
+        const logo = document.getElementById('logo');
+        gsap.to(logo, {duration: 2, rotation: 360, repeat: -1, ease: "elastic.out(1, 0.3)"});
+
+        // Data produk
+        const products = [
+            {name: "Sepatu Running Ortuseight Solar", price: 1200000, image: "https://sportaways.com/media/catalog/product/cache/cd7c6c71a47e90564e17811b95cac4e3/o/r/ortuseight_solar_-_off_whiteortrange_1.jpg"},
+            {name: "Sepatu Running Nike journey Run", price: 1399000, image: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/3bb1a237-6b87-470b-85a6-a414a3c8e81e/NIKE+JOURNEY+RUN.png"},
+            {name: "Sepatu Running Adidas Adizero Adios Pro 3", price: 3914500, image: "https://assets.adidas.com/images/w_940,f_auto,q_auto/7c2ecb5e638a4dc4b2e4af87010a3290_9366/GW7258_01_standard.jpg"},
+            {name: "Al Nassr FC 24/25 Home Jersey", price: 2036378, image: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/4637af8460a340dda6fedf8f8bd1c799_9366/Al_Nassr_FC_24-25_Ronaldo_Home_Jersey_Yellow_JP0459_01_laydown.jpg"},
+            {name: "Indonesia 2018 Nike Away Kit", price: 1200000, image: "https://www.footballshirtculture.com/images/stories/indonesia-2018-nike-away-kit/indonesia_2018_nike_away_kit_a.jpg"},
+            {name: "Argentina 2024 Adidas Home Kit", price: 2036378, image: "https://www.footballshirtculture.com/images/cwgallery/2303-argentina-2024-adidas-home-kit/thumb_2303_argentina_2024_adidas_home_kit_i1%201.jpg"}
+        ];
+
+        // Fungsi untuk menampilkan produk
+        function displayProducts() {
+            const productsContainer = document.getElementById('products');
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-price">Rp ${product.price.toLocaleString()}</p>
+                        <button class="buy-btn">Beli Sekarang</button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        // Menampilkan produk saat halaman dimuat
+        window.onload = displayProducts;
+
+        // Animasi untuk tombol Beli Sekarang
+        document.addEventListener('click', function(e) {
+            if(e.target && e.target.className == 'buy-btn') {
+                gsap.to(e.target, {duration: 0.1, scale: 0.95, yoyo: true, repeat: 1});
+                alert('Produk ditambahkan ke keranjang!');
+            }
+        });
+
+        // Animasi untuk ikon keranjang
+        const cartIcon = document.getElementById('cart-icon');
+        cartIcon.addEventListener('click', function() {
+            gsap.to(this, {duration: 0.5, y: -20, yoyo: true, repeat: 1});
+            alert('Keranjang belanja Anda');
+        });
+
+        // Animasi untuk special offer
+        gsap.to('#specialOffer', {duration: 1, opacity: 0.8, yoyo: true, repeat: -1});
+    </script>
+</body>
+</html>
